@@ -1,0 +1,45 @@
+html {
+  overflow: hidden;
+}
+
+.Opponent, .Boss {
+	animation: rotation 3s infinite linear;
+	-webkit-animation: rotation 3s infinite linear;
+}
+
+.paused .Opponent, .paused .Boss {
+	animation: none;
+	-webkit-animation: none;
+}
+
+@-webkit-keyframes rotation {
+	from {
+		transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(359deg);
+		-webkit-transform: rotate(359deg);
+	}
+}
+
+.gamebutton {
+	border: none;
+	background: #ddd;
+	color: #333;
+	padding: 10px 20px;
+	outline: none;
+	font-family: monospace;
+	cursor: pointer;
+}
+
+
+#info {
+	position: absolute;
+	top: 0;
+	right: 20px;
+	list-style: none;
+	font-family: monospace;
+	font-size: 16px;
+	color: #333;
+}
