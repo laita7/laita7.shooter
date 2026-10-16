@@ -17,7 +17,7 @@ class Game {
         this.opponentShots = []; // Shots fired by the opponent
         this.xDown = null; // Position where the user touched the screen
         this.paused = false; // Indicates whether the game is paused
-        this.score = 0; // Score of the player
+        this.score = 0; // Puntuación del jugador
     }
 
 
@@ -94,7 +94,7 @@ class Game {
             document.body.removeChild(this.opponent.image);
         }
         if (this.opponent instanceof Boss) {
-            // The boss has been defeated, the player wins
+            // Se ha derrotado al jefe final, el jugador gana
             this.opponent = undefined;
             this.endGame();
         } else {
@@ -278,7 +278,7 @@ class Game {
     }
 
     /**
-     * Show the score and the lives of the player on the screen
+     * Muestra en pantalla la puntuación y las vidas del jugador
      */
     updateInfo () {
         document.getElementById("scoreli").innerHTML = "Score: " + this.score;

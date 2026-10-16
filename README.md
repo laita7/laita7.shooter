@@ -1,87 +1,85 @@
+## Práctica con clases, booleanos, cadenas y manejo de eventos
 
-## Practice with Classes, Booleans, Strings, and Event Handling
 
-
-In this assignment, we are going to develop a complete game using HTML, CSS, and JavaScript. The game is a classic shooting game where we control our character (a square) using the arrow keys or touch screen. The objective of the game is to shoot a series of shapes that will appear on the screen and turn them into stars, while dodging their shots. To start the development, we will use the basic version of the game, for which we provide the code.
+En esta práctica vamos a desarrollar un juego completo utilizando HTML, CSS y JavaScript. El juego es un clásico juego de disparos en el que controlamos a nuestro personaje (un cuadrado) mediante las teclas de dirección o una pantalla táctil. El objetivo del juego es disparar a una serie de figuras que aparecerán en la pantalla y convertirlas en estrellas, mientras esquivamos sus disparos. Para comenzar el desarrollo utilizaremos una versión básica del juego, cuyo código se proporciona.
 
 ![game](assets/game.png)
 
-## Game elements
+## Elementos del juego
 
-The project should be downloaded or cloned onto the computer from which you are working. To do this, you can download the zip package with the code from the attached file.
-In this code, we model each of the game elements using a JavaScript class with its methods and attributes, which are described below:
+El proyecto debe descargarse o clonarse en el ordenador desde el que se esté trabajando. Para ello, puede descargarse el paquete con el código desde el archivo adjunto.
+En este código modelamos cada uno de los elementos del juego mediante una clase de JavaScript con sus métodos y atributos:
 
-- Entity: Each of the elements drawn in the game
-- Character: Each of the characters in the game, meaning those elements that have "life". Inherits from the ENTITY class.
-- Player: The main character of the game. Inherits from the CHARACTER class.
-- Opponent: The shape that we need to turn into a star. Inherits from the CHARACTER class.
-- Shot: A shot from a CHARACTER. Inherits from the ENTITY class.
-- Game: The game itself.
+- Entity: Cada uno de los elementos dibujados en el juego.
+- Character: Cada uno de los personajes del juego, es decir, aquellos elementos que tienen "vida". Hereda de la clase ENTITY.
+- Player: El personaje principal del juego. Hereda de la clase CHARACTER.
+- Opponent: La figura que debemos convertir en una estrella. Hereda de la clase CHARACTER.
+- Shot: Un disparo de un CHARACTER. Hereda de la clase ENTITY.
+- Game: El propio juego.
 
-In the provided code, all the attributes and methods of these classes are documented in detail. The following diagram shows the class inheritance hierarchy:
+En el código proporcionado, todos los atributos y métodos de estas clases están documentados detalladamente. El siguiente diagrama muestra la jerarquía de herencia entre las clases:
 
 ![class](assets/class.png)
 
 
-## Game start and update
+## Inicio y actualización del juego
 
-In the index.html file, all the necessary scripts for the game’s functionality are imported, including all the required classes and the main.js file. In this file, a series of constants necessary for the game are defined, an instance of the GAME class is created, and its START method is called to begin the game.
+En el archivo index.html se importan todos los scripts necesarios para el funcionamiento del juego, incluidas todas las clases requeridas y el archivo main.js. En este archivo se definen una serie de constantes necesarias para el juego, se crea una instancia de la clase GAME y se llama a su método START para iniciar el juego.
 
-The START method creates the characters, draws the game according to the screen size, and initializes the event listeners (which we will see in the next section). Additionally, this method starts a timer that calls the UPDATE function every 50 ms to update and render the game's current state based on user actions, opponent movements, and the position of the shots. This time interval is equivalent to 20 frames per second, meaning we are updating the game 20 times per second—more than enough to create the illusion of movement.
-
-
-## Event Handler
-
-To control the main character of the game with the arrow keys or touch screen, we need to use the events provided by the browser for this purpose. In the START method of the GAME class, we initialize the necessary event listeners:
-
-- keydown: Called when the user presses a key. Stores the pressed key in the KEYPRESSED attribute of GAME.
-- keyup: Called when the user releases a key. Clears the content of the KEYPRESSED attribute of GAME.
-- touchstart: Called when the user touches the screen. Stores the horizontal position (x) where the user touched in the XDOWN attribute of GAME.
-- touchmove: Called when the user drags their finger across the screen. Clears the content of the XDOWN attribute of GAME.
-
-As mentioned earlier, every 50 ms the UPDATE method of GAME is called. This method checks the value of XDOWN and KEYPRESSED to update the position of the main character based on the user's actions.
+El método START crea los personajes, dibuja el juego según el tamaño de la pantalla e inicializa los detectores de eventos (que veremos en la siguiente sección). Además, este método inicia un temporizador que llama a la función UPDATE cada 50 ms para actualizar y representar el estado actual del juego según las acciones del usuario, los movimientos del oponente y la posición de los disparos. Este intervalo de tiempo equivale a 20 fotogramas por segundo, lo que significa que actualizamos el juego 20 veces por segundo, más que suficiente para crear la ilusión de movimiento.
 
 
+## Manejador de eventos
 
-## TASKS
+Para controlar al personaje principal del juego mediante las teclas de dirección o una pantalla táctil, necesitamos utilizar los eventos proporcionados por el navegador para este propósito. En el método START de la clase GAME inicializamos los detectores de eventos necesarios:
 
-You are required to modify the provided code to implement three new functionalities:
+- keydown: Se ejecuta cuando el usuario pulsa una tecla. Almacena la tecla pulsada en el atributo KEYPRESSED de GAME.
+- keyup: Se ejecuta cuando el usuario suelta una tecla. Vacía el contenido del atributo KEYPRESSED de GAME.
+- touchstart: Se ejecuta cuando el usuario toca la pantalla. Almacena la posición horizontal (x) donde el usuario tocó en el atributo XDOWN de GAME.
+- touchmove: Se ejecuta cuando el usuario arrastra el dedo por la pantalla. Vacía el contenido del atributo XDOWN de GAME.
 
-- [TASK 1] Recording the user’s score: Each time an opponent is turned into a star, the score should increase by one point.
-- [TASK 2] The main character should have three lives: If hit by a shot, instead of losing immediately, the number of lives will decrease by one, giving the player another chance to win. If the number of lives reaches zero, the game is over.
-- [TASK 3] If the player hits the opponent (triangle) and turns it into a star, a more powerful final boss (pentagon) will appear. This boss will move twice as fast as the triangle.
-
-To implement these three features, follow these steps:
-
-- [TASK 1] 
-1- Add a new SCORE attribute to the GAME class that reflects the score (initially 0).
-2- Modify the code in the COLLIDE method of the OPPONENT class so that it increments SCORE by one each time a triangle is hit by a shot.
-
-
-- [TASK 2] 
-1- Add a new LIVES attribute to the PLAYER class, initially set to 3. You can define the initial number of lives in a constant in main.js.
-2- Modify the code in the COLLIDE method of the PLAYER class so that it reduces one life each time the player is hit by a shot while still alive.
-If the player has lives remaining, they should "die" for two seconds (by calling the collide method of the CHARACTER superclass) and revive after that time. To do this, the src attribute of this.image should recover its original value (from this.myImage), and this.dead should be set to false.
-If the player has no lives left, they should die permanently (by calling the collide method of the CHARACTER superclass), and the game should end by calling the endGame method.
-
-3- Add the necessary code to display the score and lives on the game screen at all times. To do this, create a list (ul HTML tag) with two elements (li tag). The first, with id="scoreli", will display the score in the following format: Score: x, where x is the value of the game's SCORE attribute. The second, with id="livesli", will display the number of lives in the following format: Lives: y, where y is the value of the player's LIVES attribute. To update the HTML with the score and lives values, use the innerHTML method of the corresponding HTML element.
-
-
-- [TASK 3] 
-1- Create a new class called BOSS in a new file named Boss.js (don’t forget to import it in index.html). This class should inherit the necessary methods and attributes from the OPPONENT class, overriding those that are necessary to achieve the required functionality. To represent the final boss, you can use the boss.png and boss_dead.png images from the assets folder.
-
-2- Modify the necessary code in the removeOpponent method of GAME so that when the player manages to defeat the triangle, the final challenge appears. In other words, the opponent attribute of the GAME instance should contain a Boss object when the player defeats the initial opponent.
-
-3- Modify the code in the endGame function (without changing the header) so that, if the player defeats the final boss, meaning they win the game with more than 0 lives, the you_win.png image from the assets folder appears instead of game_over.png.
+Como se ha mencionado anteriormente, cada 50 ms se llama al método UPDATE de GAME. Este método comprueba el valor de XDOWN y KEYPRESSED para actualizar la posición del personaje principal según las acciones del usuario.
 
 
 
+## TAREAS
 
-## RUBRIC
+Se requiere modificar el código proporcionado para implementar tres nuevas funcionalidades:
 
-The assignment will be graded by adding the indicated percentage to the total score if the specified part is correct:
+- [TAREA 1] Registrar la puntuación del usuario: Cada vez que un oponente se convierta en una estrella, la puntuación deberá aumentar en un punto.
+- [TAREA 2] El personaje principal debe tener tres vidas: Si recibe el impacto de un disparo, en lugar de perder inmediatamente, el número de vidas disminuirá en una unidad, dando al jugador otra oportunidad para ganar. Si el número de vidas llega a cero, la partida terminará.
+- [TAREA 3] Si el jugador golpea al oponente (triángulo) y lo convierte en una estrella, aparecerá un jefe final más poderoso (pentágono). Este jefe se moverá al doble de velocidad que el triángulo.
 
-- 25%: Correctly displays the user's lives.
-- 25%: Correctly displays the user's score.
-- 50%: The final opponent functionality is implemented correctly.
+Para implementar estas tres funcionalidades, siga los siguientes pasos:
 
+- [TAREA 1]
+1- Añada un nuevo atributo SCORE a la clase GAME que represente la puntuación (inicialmente 0).
+2- Modifique el código en el método COLLIDE de la clase OPPONENT para que incremente SCORE en una unidad cada vez que un triángulo sea alcanzado por un disparo.
+
+
+- [TAREA 2]
+1- Añada un nuevo atributo LIVES a la clase PLAYER, inicializado con el valor 3. Puede definir el número inicial de vidas en una constante dentro de main.js.
+2- Modifique el código en el método COLLIDE de la clase PLAYER para que reduzca una vida cada vez que el jugador sea alcanzado por un disparo mientras siga vivo.
+Si al jugador le quedan vidas, deberá "morir" durante dos segundos (llamando al método collide de la superclase CHARACTER) y revivir después de ese tiempo. Para ello, el atributo src de this.image deberá recuperar su valor original (almacenado en this.myImage) y this.dead deberá establecerse en false.
+Si al jugador no le quedan vidas, deberá morir permanentemente (llamando al método collide de la superclase CHARACTER) y el juego deberá finalizar llamando al método endGame.
+
+3- Añada el código necesario para mostrar en todo momento la puntuación y las vidas en la pantalla del juego. Para ello, cree una lista (etiqueta HTML ul) con dos elementos (etiqueta li). El primero, con id="scoreli", mostrará la puntuación con el siguiente formato: Score: x, donde x es el valor del atributo SCORE del juego. El segundo, con id="livesli", mostrará el número de vidas con el formato: Lives: y, donde y es el valor del atributo LIVES del jugador. Para actualizar el HTML con los valores de puntuación y vidas, utilice el método innerHTML del elemento HTML correspondiente.
+
+
+- [TAREA 3]
+1- Cree una nueva clase llamada BOSS en un nuevo archivo denominado Boss.js (no olvide importarlo en index.html). Esta clase deberá heredar los métodos y atributos necesarios de la clase OPPONENT, sobrescribiendo aquellos que sean necesarios para conseguir la funcionalidad requerida. Para representar al jefe final puede utilizar las imágenes boss.png y boss_dead.png de la carpeta assets.
+
+2- Modifique el código necesario en el método removeOpponent de GAME para que, cuando el jugador consiga derrotar al triángulo, aparezca el desafío final. Es decir, el atributo opponent de la instancia de GAME deberá contener un objeto Boss cuando el jugador derrote al oponente inicial.
+
+3- Modifique el código de la función endGame (sin cambiar su cabecera) para que, si el jugador derrota al jefe final, es decir, gana la partida con más de 0 vidas, aparezca la imagen you_win.png de la carpeta assets en lugar de game_over.png.
+
+
+
+
+## RÚBRICA
+
+La práctica se calificará sumando a la nota total el porcentaje indicado si la parte especificada es correcta:
+
+- 25%: Se muestran correctamente las vidas del usuario.
+- 25%: Se muestra correctamente la puntuación del usuario.
+- 50%: La funcionalidad del oponente final está implementada correctamente.

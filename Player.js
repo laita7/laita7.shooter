@@ -18,7 +18,7 @@ class Player extends Character {
             myImageDead = PLAYER_PICTURE_DEAD;
 
         super(game, width, height, x, y, speed, myImage, myImageDead);
-        this.lives = PLAYER_LIVES; // Number of lives of the player
+        this.lives = PLAYER_LIVES; // Número de vidas del jugador
     }
 
     /**
@@ -52,7 +52,7 @@ class Player extends Character {
             this.lives--;
             super.collide();
             if (this.lives > 0) {
-                // The player revives after 2 seconds
+                // El jugador revive pasados 2 segundos
                 setTimeout(() => {
                     this.image.src = this.myImage;
                     this.dead = false;
